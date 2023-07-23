@@ -10,6 +10,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
+import './messages.css';
 
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { getSender,getSenderFull } from '../config/ChatLogics';
@@ -17,14 +18,16 @@ import ProfileModal from './miscellaneous/ProfileModal';
 import UpdateGroupChatModal from './miscellaneous/UpdateGroupChatModal';
 import ScrollableChat from "./ScrollableChat"
 import io from 'socket.io-client'
+
+
 const ENDPOINT = "http://localhost:3002";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
-     const [message, setMessage] = useState([]);
+    const [message, setMessage] = useState([]);
     const [loading, setLoading] = useState(false);
-      const [newMessage, setNewMessage] = useState();
+    const [newMessage, setNewMessage] = useState();
     const [socketConnected,setSocketConnected]= useState(false)
     const [typing, setTyping] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
@@ -78,6 +81,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
        fetchMessages();
 
        selectedChatCompare = selectedChat;
+       // eslint-disable-next-line
      }, [selectedChat]);
 
      useEffect(() => {
@@ -95,7 +99,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
              setMessage([...message, newMessageRecieved]);
            }
          });
-     });
+     },[]);
     
     
     const sendMessage = async (e) => {
@@ -243,7 +247,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 ) : (
                   <></>
                 )}
-                            <Input
+                <Input
                   color="white"
                   variant="filled"
                   background="#78787a61"
