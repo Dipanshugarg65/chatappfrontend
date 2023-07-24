@@ -82,7 +82,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
        selectedChatCompare = selectedChat;
        // eslint-disable-next-line
-     }, [selectedChat]);
+     }, [selectedChat,fetchAgain]);
 
      useEffect(() => {
          socket.on("message recieved", (newMessageRecieved) => {
