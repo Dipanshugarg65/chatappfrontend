@@ -1,18 +1,20 @@
+import React, { useState } from "react";
 import { Button, useToast } from "@chakra-ui/react";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { VStack } from "@chakra-ui/layout";
-import React, { useState } from "react";
 import axios from "axios";
-// import { useHistory } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+
+// import { useHistory } from "react-router-dom";
+
 
 const Login = () => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const toast = useToast();
 const [loading, setLoading] = useState(false);
-    const toast = useToast();
       const navigate = useNavigate();
 // const history = useHistory();
 
@@ -20,19 +22,21 @@ const [loading, setLoading] = useState(false);
 
    const submitHandler = async () => {
      setLoading(true);
+
      if (!email || !password) {
        toast({
          title: "Please Fill all the Feilds",
          status: "warning",
          duration: 5000,
          isClosable: true,
-         position: "bottom",
+         position: "top",
        });
        setLoading(false);
        return;
      }
 
      // console.log(email, password);
+
      try {
        const config = {
          headers: {
@@ -47,17 +51,27 @@ const [loading, setLoading] = useState(false);
        );
 
        // console.log(JSON.stringify(data));
+
+       window.location.reload(true);
+       window.location.reload(false);
+
        toast({
          title: "Login Successful",
          status: "success",
          duration: 5000,
          isClosable: true,
-         position: "bottom",
+         position: "top",
        });
+
+
        localStorage.setItem("userInfo", JSON.stringify(data));
+
+
          setLoading(false);
-           navigate("/chats");
+       navigate("/chats");
+       
       //  history.push("/chats");
+       
      } catch (error) {
        toast({
          title: "Error Occured!",
@@ -65,7 +79,7 @@ const [loading, setLoading] = useState(false);
          status: "error",
          duration: 5000,
          isClosable: true,
-         position: "bottom",
+         position: "top",
        });
        setLoading(false);
      }
@@ -78,21 +92,23 @@ const [loading, setLoading] = useState(false);
           alt="Sample"
         />
 
-        <VStack spacing="5px" color="black">
+        <VStack spacing="50px" color="black">
           <FormControl id="Email" isRequired>
-            <FormLabel>Email</FormLabel>
+            <FormLabel color="white">Email</FormLabel>
             <Input
-              value={email}
+              color="white"
               placeholder="Enter Your Email"
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </FormControl>
           <FormControl id="Password" isRequired>
-            <FormLabel>Password</FormLabel>
+            <FormLabel color="white">Password</FormLabel>
             <InputGroup>
               <Input
+                color="white"
                 type={show ? "text" : "password"}
-                placeholder="Enter Your Password"
+                placeholder="Enter Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -105,13 +121,13 @@ const [loading, setLoading] = useState(false);
           </FormControl>
 
           <Button
-            colorScheme="blue"
+            colorScheme="cyan"
             width="100%"
             style={{ marginTop: 15 }}
             onClick={submitHandler}
             isLoading={loading}
           >
-            {" "}
+            {/* {" "} */}
             Login
           </Button>
           <Button

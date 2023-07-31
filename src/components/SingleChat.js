@@ -9,13 +9,13 @@ import {
   FormControl,
   useToast,
 } from "@chakra-ui/react";
-import axios from "axios";
 import './messages.css';
 
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { getSender,getSenderFull } from '../config/ChatLogics';
 import ProfileModal from './miscellaneous/ProfileModal';
 import UpdateGroupChatModal from './miscellaneous/UpdateGroupChatModal';
+import axios from "axios";
 import ScrollableChat from "./ScrollableChat"
 import io from 'socket.io-client'
 
@@ -51,7 +51,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
            `http://localhost:3002/api/message/${selectedChat._id}`,
            config
          );
-         setMessage(data);
+          setMessage(data);
+         console.log(message)
            setLoading(false);
            
            socket.emit('join chat', selectedChat._id);
@@ -87,14 +88,16 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
      useEffect(() => {
          socket.on("message recieved", (newMessageRecieved) => {
            if (
-             !selectedChatCompare ||
+             !selectedChatCompare || // if chat is not selected or doesn't match current chat
              selectedChatCompare._id !== newMessageRecieved.chat._id
            ) {
-             //give notification
-                if (!notification.includes(newMessageRecieved)) {
-                  setNotification([newMessageRecieved, ...notification]);
-                  setFetchAgain(!fetchAgain);
-                }
+             
+             //give notification.......
+
+             if (!notification.includes(newMessageRecieved)) {
+               setNotification([newMessageRecieved, ...notification]);
+               setFetchAgain(!fetchAgain);
+             }
            } else {
              setMessage([...message, newMessageRecieved]);
            }
@@ -113,7 +116,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
          },
        };
          setNewMessage("");
-         
+       
        const { data } = await axios.post(
          "http://localhost:3002/api/message",
          {
@@ -124,9 +127,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
        );
 
     //    console.log(data);
-        //  setNewMessage("");
+      
        socket.emit('new message', data);
-          setMessage([...message, data]);
+  
+       setMessage([...message, data]);
+   
      } catch (error) {
        toast({
          title: "Error Occured",
@@ -141,6 +146,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     };
       const typingHandler = (e) => {
         setNewMessage(e.target.value);
+
+        // typing indicator logic
 
         if (!socketConnected) return;
 
@@ -161,21 +168,13 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           }
         }, timerLength);
       };
-
-    
- 
-    // const ScrollableChat = () => { };
-    
-    // const isTyping = (e) => { 
-    //   setNewMessage(e.target.value);  
-    // };
    
 
     return (
       <>
         {selectedChat ? (
           <>
-            {" "}
+            {/* {" "} */}
             <Text
               fontSize={{ base: "25px", md: "27px" }}
               pb={3}
@@ -253,8 +252,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                   background="#78787a61"
                   placeholder="Enter a message.."
                   onChange={typingHandler}
-                  value={newMessage}
-                            />
+                  value={newMessage || ""}
+                />
               </FormControl>
             </Box>
           </>
@@ -265,7 +264,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             justifyContent="center"
             h="100%"
           >
-            <Text fontSize="3xl" pb={3} fontFamily="worksans">
+            <Text fontSize="3xl" pb={3} fontFamily="worksans" color="white">
               Click on User to Start the Conversation
             </Text>
           </Box>

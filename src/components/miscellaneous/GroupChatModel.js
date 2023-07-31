@@ -99,7 +99,7 @@ const GroupChatModel = ({children}) => {
           status: "success",
           duration: 5000,
           isClosable: true,
-          position: "bottom",
+          position: "top",
         });
       } catch (error) {
         toast({
@@ -108,7 +108,7 @@ const GroupChatModel = ({children}) => {
           status: "error",
           duration: 5000,
           isClosable: true,
-          position: "bottom",
+          position: "top",
         });
       }
     };
@@ -136,68 +136,70 @@ const GroupChatModel = ({children}) => {
 
     return (
       <>
-      <span onClick={onOpen}>{children}</span>
+        <span onClick={onOpen}>{children}</span>
 
-      <Modal onClose={onClose} isOpen={isOpen} isCentered>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader
-            fontSize="35px"
-            fontFamily="Work sans"
-            d="flex"
-            justifyContent="center"
-          >
-            Create Group Chat
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody d="flex" flexDir="column" alignItems="center">
-            <FormControl>
-              <Input
-                placeholder="Chat Name"
-                mb={3}
-                onChange={(e) => setGroupChatName(e.target.value)}
-              />
-            </FormControl>
-            <FormControl>
-              <Input
-                placeholder="Add Users eg: Rohit, Deep, Himanshu"
-                mb={1}
-                onChange={(e) => handleSearch(e.target.value)}
-              />
-            </FormControl>
-            <Box w="100%" d="flex" flexWrap="wrap">
-              {selectedUsers.map((u) => (
-                <UserBadgeItem
-                  key={u._id}
-                  user={u}
-                  handleFunction={() => handleDelete(u)}
+        <Modal onClose={onClose} isOpen={isOpen} isCentered>
+          <ModalOverlay />
+          <ModalContent background="black" borderWidth={2}>
+            <ModalHeader
+              fontSize="35px"
+              fontFamily="Work sans"
+              display="flex"
+              justifyContent="center"
+              color="white"
+            >
+              Create Group Chat
+            </ModalHeader>
+            <ModalCloseButton color="white" />
+            <ModalBody d="flex" flexDir="column" alignItems="center">
+              <FormControl>
+                <Input
+                  placeholder="Group Name"
+                  mb={3}
+                  onChange={(e) => setGroupChatName(e.target.value)}
                 />
-              ))}
-            </Box>
-            {loading ? (
-              // <ChatLoading />
-              <div>Loading...</div>
-            ) : (
-              searchResult
-                ?.slice(0, 4)
-                .map((user) => (
-                  <UserListItem
-                    key={user._id}
-                    user={user}
-                    handleFunction={() => handleGroup(user)}
+              </FormControl>
+              <FormControl>
+                <Input
+                  color="white"
+                  placeholder="Add Users eg: Rohit, Deep, Himanshu"
+                  marginBottom="1"
+                  onChange={(e) => handleSearch(e.target.value)}
+                />
+              </FormControl>
+              <Box width="100%" display="flex" flexWrap="wrap">
+                {selectedUsers.map((u) => (
+                  <UserBadgeItem
+                    key={u._id}
+                    user={u}
+                    handleFunction={() => handleDelete(u)}
                   />
-                ))
-            )}
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={handleSubmit} colorScheme="blue">
-              Create Chat
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
-  );
+                ))}
+              </Box>
+              {loading ? (
+                // <ChatLoading />
+                <div>Loading...</div>
+              ) : (
+                searchResult
+                  ?.slice(0, 4)
+                  .map((user) => (
+                    <UserListItem
+                      key={user._id}
+                      user={user}
+                      handleFunction={() => handleGroup(user)}
+                    />
+                  ))
+              )}
+            </ModalBody>
+            <ModalFooter>
+              <Button onClick={handleSubmit} colorScheme="blue">
+                Create Chat
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </>
+    );
 };
 
 export default GroupChatModel

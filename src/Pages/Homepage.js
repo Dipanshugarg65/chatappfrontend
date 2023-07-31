@@ -27,32 +27,36 @@ const Homepage = () => {
   return (
     <Container maxW="xl" centerContent>
       <Box
-        d="flex"
+        display="flex"
         justifyContent="center"
-        textAlign="center"
-        p={3}
-        bg={"white"}
-        w="100%"
-        m="40px 0 15px 0"
+        // textAlign="center"
+        // p={3}
+        background={"#2c232925"}
+        width="100%"
+        margin="50px 0 15px 0"
         borderRadius="lg"
         borderWidth="1px"
       >
-        <Text fontSize="4xl" fontFamily="Work sans" color="black">
+        <Text fontSize="4xl" fontFamily="Work sans" color={"white"}>
           Socio-Chit-Chat
         </Text>
       </Box>
       <Box
-        bg="white"
-        w="100%"
-        p={4}
+        background="#ebebfc25"
+        width="100%"
+        padding={4}
         borderRadius="lg"
         borderWidth="1px"
         color="black"
       >
-        <Tabs isFitted variant="soft-rounded">
-          <TabList mb="1em">
-            <Tab width="50%">Login</Tab>
-            <Tab width="50%">Sign-Up</Tab>
+                <Tabs variant="soft-rounded" colorScheme="cyan">
+          <TabList marginBottom="1em">
+            <Tab width="50%" color="white">
+              Login
+            </Tab>
+            <Tab width="50%" color="white">
+              Register
+            </Tab>
           </TabList>
           <TabPanels>
             <TabPanel>

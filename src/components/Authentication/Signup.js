@@ -1,24 +1,29 @@
+import React, { useState } from "react";
 import { Button, useToast } from "@chakra-ui/react";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { VStack } from "@chakra-ui/layout";
-import React, { useState } from "react";
 import axios from "axios";
+
 // import { useHistory } from "react-router-dom";
+
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const [name, setName] = useState();
   const [show, setShow] = useState(false);
+  const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [confirmpassword, setConfirmpassword] = useState();
   const [password, setPassword] = useState();
-  const [loading, setLoading] = useState(false);
   const [pic, setPic] = useState();
+  const [loading, setLoading] = useState(false);
   const toast = useToast();
+
   // const history = useHistory();
+
     const navigate = useNavigate();
   const handleClick = () => setShow(!show);
+
   //  https://api.cloudinary.com/v1_1/roadies
 
   const postDetails = (pics) => {
@@ -29,7 +34,7 @@ const Signup = () => {
         status: "warning",
         duration: 5000,
         isClosable: true,
-        position: "bottom",
+        position: "top",
       });
       return;
     }
@@ -59,11 +64,11 @@ const Signup = () => {
         });
     } else {
       toast({
-        title: "Please Select an Image for profile!",
+        title: "Please Select an Image for your profile Picture!",
         status: "warning",
         duration: 5000,
         isClosable: true,
-        position: "bottom",
+        position: "top",
       });
 
       setLoading(false);
@@ -75,11 +80,11 @@ const Signup = () => {
     setLoading(true);
     if (!name || !email || !password || !confirmpassword) {
       toast({
-        title: "Please Fill all the Required fields",
+        title: "Please Fill all the Required Field",
         status: "warning",
         duration: 5000,
         isClosable: true,
-        position: "bottom",
+        position: "top",
       });
       setLoading(false);
       return;
@@ -90,8 +95,9 @@ const Signup = () => {
         status: "warning",
         duration: 5000,
         isClosable: true,
-        position: "bottom",
+        position: "top",
       });
+        setLoading(false);
       return;
     }
     try {
@@ -102,6 +108,7 @@ const Signup = () => {
       };
       const  data  = await axios.post(
         "http://localhost:3002/api/user",
+
       // const { data } = await axios.post(
       //   "localhost:3000/api/user",
       
@@ -115,28 +122,30 @@ const Signup = () => {
       );
    
       
-      // window.location.reload(true);
-      // window.location.reload(false);
+      window.location.reload(true);
+      window.location.reload(false);
 
       toast({
         title: "Registration Successful",
         status: "success",
         duration: 5000,
         isClosable: true,
-        position: "bottom",
+        position: "top",
       });
+
       localStorage.setItem("userInfo", JSON.stringify(data));
+
       setLoading(false);
       // history.push("/chats");
       navigate("/chats");
     } catch (error) {
       toast({
         title: "Error Occured!",
-        // description: error.response.data.message,
+        description: error.response.data.message,
         status: "error",
         duration: 5000,
         isClosable: true,
-        position: "bottom",
+        position: "top",
       });
       setLoading(false);
     }
@@ -148,25 +157,28 @@ const Signup = () => {
         src="https://website-static.testsigma.com/assets/signup/signup-og.jpg"
         alt="Sample"
       />
-      <VStack spacing="5px" color="black">
+      <VStack spacing="20px" color="black">
         <FormControl id="first-name" isRequired>
-          <FormLabel>Name</FormLabel>
+          <FormLabel color="white">Name</FormLabel>
           <Input
+            color="white"
             placeholder="Enter Your Name"
             onChange={(e) => setName(e.target.value)}
           />
         </FormControl>
         <FormControl id="Email" isRequired>
-          <FormLabel>Email</FormLabel>
+          <FormLabel color="white">Email</FormLabel>
           <Input
+            color="white"
             placeholder="Enter Your Email"
             onChange={(e) => setEmail(e.target.value)}
           />
         </FormControl>
         <FormControl id="Password" isRequired>
-          <FormLabel>Password</FormLabel>
+          <FormLabel color="white">Password</FormLabel>
           <InputGroup>
             <Input
+              color="white"
               type={show ? "text" : "password"}
               placeholder="Enter Your Password"
               onChange={(e) => setPassword(e.target.value)}
@@ -179,9 +191,10 @@ const Signup = () => {
           </InputGroup>
         </FormControl>
         <FormControl id="password" isRequired>
-          <FormLabel>Confirm Password</FormLabel>
+          <FormLabel color="white">Confirm Password</FormLabel>
           <InputGroup>
             <Input
+              color="white"
               type={show ? "text" : "password"}
               placeholder="Confirm Password"
               onChange={(e) => setConfirmpassword(e.target.value)}
@@ -194,8 +207,9 @@ const Signup = () => {
           </InputGroup>
         </FormControl>
         <FormControl id="pic" isRequired>
-          <FormLabel>Upload Your Picture</FormLabel>
+          <FormLabel color="white">Upload Your Profile Picture</FormLabel>
           <Input
+            color="white"
             type="file"
             p={1.5}
             accept="image/*"
@@ -203,14 +217,14 @@ const Signup = () => {
           />
         </FormControl>
         <Button
-          colorScheme="blue"
+          colorScheme="cyan"
           width="100%"
           style={{ marginTop: 15 }}
           onClick={submitHandler}
           isLoading={loading}
         >
-          {" "}
-          Sign-Up
+          {/* {" "} */}
+          Register
         </Button>
       </VStack>
     </>

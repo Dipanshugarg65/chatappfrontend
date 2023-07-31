@@ -19,7 +19,7 @@ const UserBadgeItem = ({user,handleFunction}) => {
       >
         {user.name}
         {/* {admin === user._id && <span> (Admin)</span>} */}
-        <CloseIcon pl={1} />
+        <CloseIcon paddingLeft={1} />
       </Badge>
   
   );

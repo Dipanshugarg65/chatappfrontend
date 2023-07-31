@@ -144,15 +144,14 @@ const SideDrawer = () => {
           display="flex"
           justifyContent="space-between"
           alignItems="center"
-          bg="#282829ca"
-          w="100%"
-          p="3px 10px 5px 10px"
+          background="#282829ca"
+          width="100%"
+          padding="3px 10px 5px 10px"
           borderWidth="5px"
           borderColor="blackAlpha.900"
         >
           <div
             style={{
-              // display:"flex",
               borderWidth: "0.2px",
               borderRadius: "20px",
               borderColor: "grey",
@@ -167,14 +166,14 @@ const SideDrawer = () => {
             >
               <Button variant="ghost" onClick={onOpen}>
                 <i className="fas fa-search"></i>
-                <Text d={{ base: "none", md: "flex" }} px={4}>
+                <Text display={{ base: "none", md: "flex" }} px={4}>
                   Search User
                 </Text>
               </Button>
             </Tooltip>
           </div>
 
-          <Text fontSize="2xl" fontFamily="Work sans" color="white">
+          <Text fontSize="1.3rem" fontFamily="Work sans" color="white">
             Socio-Chit-Chat
           </Text>
           <div>
@@ -184,7 +183,7 @@ const SideDrawer = () => {
                   count={notification.length}
                   effect={Effect.SCALE}
                 />
-                <BellIcon fontSize="2xl" m={1} />
+                <BellIcon fontSize="2xl" margin={1} color="white" />
               </MenuButton>
               <MenuList pl={2}>
                 {!notification.length && "No New Messages"}
@@ -218,13 +217,21 @@ const SideDrawer = () => {
                 />
               </MenuButton>
 
-              <MenuList>
+              <MenuList background="black">
                 <ProfileModal user={user}>
-                  <MenuItem>My Profile</MenuItem>
-                  {""}
+                  <MenuItem background="black" color="white">
+                    My Profile
+                  </MenuItem>
+                  {/* {""} */}
                 </ProfileModal>
                 <MenuDivider />
-                <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+                <MenuItem
+                  onClick={logoutHandler}
+                  background="black"
+                  color="white"
+                >
+                  Logout
+                </MenuItem>
               </MenuList>
             </Menu>
           </div>
@@ -233,21 +240,21 @@ const SideDrawer = () => {
         <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
           <DrawerOverlay />
           <DrawerContent
-          // background="#000000e9"
-          // borderWidth={2}
-          // borderRadius="5"
+            background="#000000e9"
+            borderWidth={2}
+            borderRadius="5"
           >
             <DrawerHeader
               borderBottomWidth="1px"
-              // color="white"
-              // background="#78787a9d"
+              color="white"
+              background="#78787a9d"
             >
               Search Users
             </DrawerHeader>
             <DrawerBody>
-              <Box display="flex" pb={2}>
+              <Box display="flex" paddingBottom={2}>
                 <Input
-                  // color="white"
+                  color="white"
                   placeholder="Search by name or email"
                   mr={2}
                   value={search}
@@ -266,7 +273,7 @@ const SideDrawer = () => {
                   />
                 ))
               )}
-              {loadingChat && <Spinner ml="auto" d="flex" />}
+              {loadingChat && <Spinner ml="auto" display="flex" />}
             </DrawerBody>
           </DrawerContent>
         </Drawer>

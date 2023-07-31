@@ -1,11 +1,12 @@
-import React,{useState,useEffect} from 'react'
+import { AddIcon } from '@chakra-ui/icons';
+import { Box,Stack,Text } from '@chakra-ui/layout';
+import axios from "axios";
+import React, { useState, useEffect } from 'react';
+
 import { ChatState } from '../Context/ChatProvider';
 import { useToast } from '@chakra-ui/react';
-import { Box,Stack,Text } from '@chakra-ui/layout';
 import { Button } from '@chakra-ui/button';
-import axios from "axios";
 import ChatLoading from './ChatLoading';
-import { AddIcon } from '@chakra-ui/icons';
 import { getSender } from '../config/ChatLogics';
 import GroupChatModel from './miscellaneous/GroupChatModel';
 const MyChats = ({ fetchAgain }) => {
@@ -16,7 +17,7 @@ const MyChats = ({ fetchAgain }) => {
   const toast = useToast();
 
   const fetchChats = async () => {
-    console.log("this is user token", user.token);
+    // console.log("this is user token", user.token);
     if (user.token) {
       try {
         const config = {
@@ -29,7 +30,7 @@ const MyChats = ({ fetchAgain }) => {
           "http://localhost:3002/api/chat",
           config
         );
-        console.log(chats);
+        // console.log(chats);
 
         setChats(data);
       } catch (error) {
@@ -56,20 +57,20 @@ const MyChats = ({ fetchAgain }) => {
       display={{ base: selectedChat ? "none" : "flex", md: "flex" }}
       flexDir="column"
       alignItems="center"
-      p={3}
-      bg="#282829ca"
+      padding={3}
+      background="#282829ca"
       width={{ base: "100%", md: "31%" }}
       borderRadius="lg"
       borderColor="grey"
       borderWidth="1px"
     >
       <Box
-        pb={3}
+        paddingBottom={3}
         px={3}
         fontSize={{ base: "28px", md: "30px" }}
         fontFamily="Work sans"
         display="flex"
-        w="100%"
+        width="100%"
         justifyContent="space-between"
         alignItems="center"
         backgroundColor="#000000e9"
@@ -82,7 +83,7 @@ const MyChats = ({ fetchAgain }) => {
             color="black"
             backgroundColor="#ded9d9"
             display="flex"
-            fontSize={{ base: "17px", md: "10px", lg: "17px" }}
+            fontSize={{ base: "15px", md: "10px", lg: "15px" }}
             rightIcon={<AddIcon />}
           >
             New Group Chat
@@ -93,9 +94,8 @@ const MyChats = ({ fetchAgain }) => {
         marginTop={2}
         display="flex"
         flexDir="column"
-        p={3}
+        padding={3}
         background="#000000e9"
-        // bg="#F8F8F8"
         width="100%"
         height="100%"
         borderRadius="lg"
