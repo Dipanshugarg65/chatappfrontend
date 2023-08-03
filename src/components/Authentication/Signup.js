@@ -21,7 +21,7 @@ const Signup = () => {
 
   // const history = useHistory();
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleClick = () => setShow(!show);
 
   //  https://api.cloudinary.com/v1_1/roadies
@@ -97,7 +97,7 @@ const Signup = () => {
         isClosable: true,
         position: "top",
       });
-        setLoading(false);
+      setLoading(false);
       return;
     }
     try {
@@ -106,12 +106,12 @@ const Signup = () => {
           "Content-type": "application/json",
         },
       };
-      const  data  = await axios.post(
-        "http://localhost:3002/api/user",
+      const data = await axios.post(
+        "https://chat-backend-zeqq.onrender.com/api/user",
 
-      // const { data } = await axios.post(
-      //   "localhost:3000/api/user",
-      
+        // const { data } = await axios.post(
+        //   "localhost:3000/api/user",
+
         {
           name,
           email,
@@ -120,8 +120,7 @@ const Signup = () => {
         },
         config
       );
-   
-      
+
       window.location.reload(true);
       window.location.reload(false);
 

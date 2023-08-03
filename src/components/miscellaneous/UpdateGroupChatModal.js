@@ -17,7 +17,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { ChatState } from '../../Context/ChatProvider';
+import { ChatState } from "../../Context/ChatProvider";
 import UserBadgeItem from "../UserAvatar/UserBadgeItem";
 import axios from "axios";
 import UserListItem from "../UserAvatar/UserListItem";
@@ -60,7 +60,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
       };
 
       const { data } = await axios.put(
-        `http://localhost:3002/api/chat/groupRemove`,
+        `https://chat-backend-zeqq.onrender.com/api/chat/groupRemove`,
         {
           chatId: selectedChat._id,
           userId: user1._id,
@@ -100,7 +100,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
       };
 
       const { data } = await axios.put(
-        `http://localhost:3002/api/chat/rename`,
+        `https://chat-backend-zeqq.onrender.com/api/chat/rename`,
         {
           chatId: selectedChat._id,
           chatName: groupChatName,
@@ -141,7 +141,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
         },
       };
       const { data } = await axios.get(
-        `http://localhost:3002/api/user?search=${search}`,
+        `https://chat-backend-zeqq.onrender.com/api/user?search=${search}`,
         config
       );
 
@@ -196,7 +196,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
       };
 
       const { data } = await axios.put(
-        `http://localhost:3002/api/chat/groupAdd`,
+        `https://chat-backend-zeqq.onrender.com/api/chat/groupAdd`,
         {
           chatId: selectedChat._id,
           userId: user1._id,
@@ -306,6 +306,3 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
 };
 
 export default UpdateGroupChatModal;
-
-
-

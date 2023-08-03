@@ -1,14 +1,14 @@
-import { AddIcon } from '@chakra-ui/icons';
-import { Box,Stack,Text } from '@chakra-ui/layout';
+import { AddIcon } from "@chakra-ui/icons";
+import { Box, Stack, Text } from "@chakra-ui/layout";
 import axios from "axios";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import { ChatState } from '../Context/ChatProvider';
-import { useToast } from '@chakra-ui/react';
-import { Button } from '@chakra-ui/button';
-import ChatLoading from './ChatLoading';
-import { getSender } from '../config/ChatLogics';
-import GroupChatModel from './miscellaneous/GroupChatModel';
+import { ChatState } from "../Context/ChatProvider";
+import { useToast } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/button";
+import ChatLoading from "./ChatLoading";
+import { getSender } from "../config/ChatLogics";
+import GroupChatModel from "./miscellaneous/GroupChatModel";
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
 
@@ -27,7 +27,7 @@ const MyChats = ({ fetchAgain }) => {
         };
 
         const { data } = await axios.get(
-          "http://localhost:3002/api/chat",
+          "https://chat-backend-zeqq.onrender.com/api/chat",
           config
         );
         // console.log(chats);
@@ -50,7 +50,7 @@ const MyChats = ({ fetchAgain }) => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
     // eslint-disable-next-line
-  }, [fetchAgain,user]);
+  }, [fetchAgain, user]);
 
   return (
     <Box
